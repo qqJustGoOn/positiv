@@ -1,0 +1,74 @@
+.contact-us {
+  position: relative;
+  overflow-x: hidden;
+
+  @include mobile-above {
+    padding: 60px 80px 100px;
+    background-color: var(--color-gray);
+    border-radius: var(--border-radius-large);
+  }
+
+  &::after {
+    --imageOffsetY: 62px;
+
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 99%;
+    translate: -50% -50%;
+    height: calc(100% - var(--imageOffsetY) * 2);
+    aspect-ratio: 1;
+    background-image: url(../../img/contact-us-bg-sky.svg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__form,
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__request-types,
+  &__body {
+    @include mobile {
+      background-color: var(--color-gray);
+    }
+  }
+
+  &__request-types {
+    margin: 0;
+
+    @include mobile {
+      padding: 40px 52px 36px;
+      border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+    }
+  }
+
+  &__body {
+    row-gap: 25px;
+
+    @include mobile {
+      row-gap: 20px;
+      padding: 10px 30px 50px;
+      border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
+      margin-bottom: 30px;
+    }
+  }
+
+  &__form {
+    //mobile-first подход
+    @include tablet-above {
+      max-width: 556px;
+    }
+
+    @include mobile-above {
+      row-gap: 40px;
+    }
+  }
+}

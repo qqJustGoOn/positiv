@@ -1,0 +1,145 @@
+.process {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    counter-reset: custom-counter;
+    list-style: none;
+    transition-duration: var(--transition-duration);
+
+    @include mobile {
+      row-gap: 20px;
+    }
+  }
+
+  &__item {
+    --counterContent: counter(custom-counter);
+
+    counter-increment: custom-counter;
+
+    &:nth-child(-n + 9) {
+      --counterContent: "0" counter(custom-counter);
+    }
+
+    details > div {
+      overflow: hidden;
+      display: grid;
+      animation-duration: 0.2s;
+    }
+
+    details > .animation {
+      animation-name: grid-expand;
+      animation-timing-function: ease-out;
+    }
+
+    details > .collapsing {
+      animation-direction: reverse;
+      animation-timing-function: ease-in;
+    }
+
+    details > div > div {
+      min-height: 0;
+    }
+
+    @keyframes grid-expand {
+      0% {
+        grid-template-rows: 0fr;
+      }
+      100% {
+        grid-template-rows: 1fr;
+      }
+    }
+  }
+
+  &__accordion {
+    --indicatorVerticalRotate: 90deg;
+
+    padding: 40px 60px;
+    background-color: var(--color-gray);
+    border: var(--border);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow);
+    transition-duration: var(--transition-duration);
+
+    @include hover {
+      background-color: var(--color-accent);
+    }
+
+    @include mobile {
+      padding: 30px;
+    }
+
+    &[open] {
+      background-color: var(--color-accent);
+
+      --indicatorVerticalRotate: 0 deg;
+    }
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 40px;
+      cursor: pointer;
+      user-select: none;
+
+      @include mobile {
+        column-gap: 28px;
+      }
+    }
+
+    &-title {
+      @include fluid-text(30, 18);
+      display: flex;
+      align-items: center;
+      column-gap: 25px;
+
+      &::before {
+        content: var(--counterContent);
+        font-size: 2em;
+
+        @include mobile {
+          font-size: 30px;
+        }
+      }
+    }
+
+    &-indicator {
+      @include flex-center;
+      @include square(58px);
+
+      position: relative;
+      flex-shrink: 0;
+      background-color: var(--color-gray);
+      border: var(--border);
+      border-radius: 50%;
+
+      @include mobile {
+        width: 30px;
+      }
+
+      &::before,
+      &::after {
+        @include abs-center;
+
+        content: "";
+        // 18/58*100 = 30%
+        width: 50%;
+        // 6/58*100 = 10%
+        height: 10%;
+        background-color: var(--color-dark);
+      }
+
+      &::after {
+        rotate: var(--indicatorVerticalRotate);
+        transition-duration: var(--transition-duration);
+      }
+    }
+
+    &-body {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: var(--border);
+    }
+  }
+}

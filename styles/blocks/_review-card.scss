@@ -1,0 +1,56 @@
+.review-card {
+  --cardCornerWIdth: 40px;
+  --cardCornerOffsetLeft: 52px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 48px;
+
+  @include mobile {
+    row-gap: 44px;
+    --cardCornerWIdth: 32px;
+    --cardCornerOffsetLeft: 46px;
+  }
+
+  &__body {
+    position: relative;
+    border: 1px solid var(--color-accent);
+    border-radius: var(--border-radius-large);
+    padding: 48px var(--cardCornerOffsetLeft) 52px;
+
+    @include mobile {
+      padding: 30px;
+    }
+
+    &::after {
+      @include square(var(--cardCornerWIdth));
+
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: var(--cardCornerOffsetLeft);
+      rotate: 45deg;
+      background-color: var(--color-dark);
+      border: inherit;
+      clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+      translate: 0 -50%;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    padding-left: calc(
+      var(--cardCornerOffsetLeft) / 2 + var(--cardCornerWIdth)
+    );
+  }
+
+  &__name,
+  &__company {
+    font-style: normal;
+  }
+
+  &__name {
+    color: var(--color-accent);
+  }
+}
