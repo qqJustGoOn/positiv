@@ -1089,7 +1089,7 @@ h4,
 .process__item details > div {
   overflow: hidden;
   display: grid;
-  animation-duration: 0.2s;
+  animation-duration: 0.3s;
 }
 .process__item details > .animation {
   animation-name: grid-expand;
